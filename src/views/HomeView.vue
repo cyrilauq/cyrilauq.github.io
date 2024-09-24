@@ -11,6 +11,14 @@ const { lastSkills } = useFetchSkills()
 <template>
   <main>
     <section>
+      <p>Hi, I am</p>
+      <h1>Cyril Auquier</h1>
+      <p>
+        An enthousiast about developping things and about learning how dto develop in this amazing
+        world.
+      </p>
+    </section>
+    <section>
       <h2>Some of my project</h2>
       <div>
         <AppProjectMiniature
@@ -19,17 +27,31 @@ const { lastSkills } = useFetchSkills()
           :project="project"
         />
       </div>
-      <p>And many more <RouterLink :to="{ name: 'all-projects' }">here</RouterLink></p>
+      <p><RouterLink :to="{ name: 'all-projects' }">View full project archive?</RouterLink></p>
     </section>
     <section>
       <SkillSection :skills="lastSkills" skills-type="Some of my skills" />
-      <p>And many more <RouterLink :to="{ name: 'all-skills' }">here</RouterLink></p>
+      <p><RouterLink :to="{ name: 'all-skills' }">Want to see all my skills?</RouterLink></p>
     </section>
   </main>
 </template>
 <style lang="css" scoped>
+main section:first-child {
+  margin-block: 2rem;
+}
+
 section > div {
   display: flex;
   justify-content: space-between;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+section p:has(a) {
+  margin-top: 2rem;
+  align-self: center;
 }
 </style>
