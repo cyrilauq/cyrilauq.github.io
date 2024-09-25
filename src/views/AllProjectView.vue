@@ -7,6 +7,14 @@ const { projects } = useFetchProjects()
 
 <template>
   <main>
-    <AppProjectMiniature v-for="(project, index) in projects" :key="index" :project="project" />
+    <h1>My projects</h1>
+    <div class="projects-wrapper">
+      <AppProjectMiniature v-for="(project, index) in projects" :key="index" :project="project" />
+    </div>
   </main>
 </template>
+<style lang="css" scoped>
+.projects-wrapper {
+  display: flex;
+}
+</style>
