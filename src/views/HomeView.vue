@@ -1,35 +1,48 @@
 <script setup lang="ts">
+import PhotoPresentationComponent from '@/components/presentation/PhotoPresentationComponent.vue'
+import PresentationTextComponent from '@/components/presentation/PresentationTextComponent.vue'
 import AppProjectMiniature from '@/components/project/AppProjectMiniature.vue'
+import ProjectList from '@/components/project/ProjectList.vue'
+import ProjectListMiniature from '@/components/project/ProjectListMiniature.vue'
 import SkillSection from '@/components/skill/SkillSection.vue'
 import { useFetchProjects } from '@/modules/composables/useFetchProjects'
 import { useFetchSkills } from '@/modules/composables/useFetchSkills'
+import Project from '@/modules/models/project'
+import { computed, onMounted, reactive, ref } from 'vue'
 
 const { lastProjects } = useFetchProjects()
 const { lastSkills } = useFetchSkills()
+
+const projectsToDisplay = computed(() =>
+  lastProjects.value?.map((p) => {
+    return { id: p.id, name: p.name }
+  })
+)
+
+const selectedProject = ref<Project | undefined>()
+
+onMounted(() => {
+  if (lastProjects.value !== undefined) {
+    selectedProject.value = lastProjects.value[0]
+  }
+})
+
+const onSelectedProjectChanged = (projectId: string) => {
+  selectedProject.value = lastProjects.value?.find((p) => p.id === projectId)
+}
 </script>
 
 <template>
   <main>
-    <section>
-      <p>Hi, I am</p>
-      <h1>Cyril Auquier</h1>
-      <p>
-        An enthousiast about developping things and about learning how dto develop in this amazing
-        world.
-      </p>
+    <section class="presentation-section">
+      <PresentationTextComponent />
+      <PhotoPresentationComponent />
     </section>
-    <section>
-      <h2>Some of my project</h2>
-      <div>
-        <AppProjectMiniature
-          v-for="(project, index) in lastProjects"
-          :key="index"
-          :project="project"
-        />
-      </div>
-      <p><RouterLink :to="{ name: 'all-projects' }">View full project archive?</RouterLink></p>
+    <section class="projects-section secundary-section">
+      <ProjectList :projects="projectsToDisplay" @project-selected="onSelectedProjectChanged" />
+      <ProjectListMiniature :project="selectedProject" />
     </section>
-    <section>
+    <section class="secundary-section">
       <SkillSection :skills="lastSkills" skills-type="Some of my skills" />
       <p><RouterLink :to="{ name: 'all-skills' }">Want to see all my skills?</RouterLink></p>
     </section>
@@ -38,6 +51,15 @@ const { lastSkills } = useFetchSkills()
 <style lang="css" scoped>
 main section:first-child {
   margin-block: 2rem;
+}
+
+main {
+  width: 1000px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 section > div {
@@ -53,5 +75,18 @@ section {
 section p:has(a) {
   margin-top: 2rem;
   align-self: center;
+}
+
+.presentation-section,
+.projects-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.secundary-section {
+  width: 90%;
+  justify-content: space-around;
 }
 </style>
