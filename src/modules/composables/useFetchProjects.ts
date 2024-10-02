@@ -45,6 +45,7 @@ export function useFetchProjects() {
       Project.fromObject({
         id: '3',
         name: 'Career-Vault',
+        liveLink: 'https://career-vault-258c9.web.app',
         description:
           "WebSite to keep a track of job application. With career-vault you can save every application you've made and share it as an excel or a pdf.",
         links: [{ name: 'front-end', link: 'https://github.com/cycy243/career-vault' }],

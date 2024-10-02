@@ -15,7 +15,7 @@ export function useFetchSkills() {
       .concat(scriptingSkills.value || [])
       .concat(softwareSkills.value || [])
     temp?.sort(() => Math.random() - 0.5)
-    return temp?.slice(-5)
+    return temp?.slice(-6)
   })
 
   onMounted(() => {
@@ -99,6 +99,10 @@ export function useFetchSkills() {
       Skill.fromObject({
         expertise: 6,
         name: 'JetBrains Rider'
+      }),
+      Skill.fromObject({
+        expertise: 6,
+        name: 'Eclipse'
       }),
       Skill.fromObject({
         expertise: 3,

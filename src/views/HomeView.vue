@@ -5,6 +5,7 @@ import AppProjectMiniature from '@/components/project/AppProjectMiniature.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
 import ProjectListMiniature from '@/components/project/ProjectListMiniature.vue'
 import SkillSection from '@/components/skill/SkillSection.vue'
+import SectionTitle from '@/components/style/SectionTitle.vue'
 import { useFetchProjects } from '@/modules/composables/useFetchProjects'
 import { useFetchSkills } from '@/modules/composables/useFetchSkills'
 import Project from '@/modules/models/project'
@@ -39,18 +40,22 @@ const onSelectedProjectChanged = (projectId: string) => {
       <PhotoPresentationComponent />
     </section>
     <section class="projects-section secundary-section">
-      <ProjectList :projects="projectsToDisplay" @project-selected="onSelectedProjectChanged" />
-      <ProjectListMiniature :project="selectedProject" />
+      <SectionTitle title="My projects" class="section-title" />
+      <div>
+        <ProjectList :projects="projectsToDisplay" @project-selected="onSelectedProjectChanged" />
+        <ProjectListMiniature :project="selectedProject" />
+      </div>
     </section>
     <section class="secundary-section">
-      <SkillSection :skills="lastSkills" skills-type="Some of my skills" />
+      <SectionTitle title="My skills" class="section-title" />
+      <SkillSection :skills="lastSkills" />
       <p><RouterLink :to="{ name: 'all-skills' }">Want to see all my skills?</RouterLink></p>
     </section>
   </main>
 </template>
 <style lang="css" scoped>
 main section:first-child {
-  margin-block: 2rem;
+  margin-block-start: 2rem;
 }
 
 main {
@@ -60,6 +65,11 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.section-title {
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
 section > div {
@@ -87,6 +97,12 @@ section p:has(a) {
 
 .secundary-section {
   width: 90%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.secundary-section > div {
+  width: 100%;
   justify-content: space-around;
 }
 </style>
