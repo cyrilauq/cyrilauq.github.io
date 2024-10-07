@@ -77,7 +77,15 @@ export function useFetchSkills() {
         name: 'CSS'
       }),
       Skill.fromObject({
-        expertise: 4,
+        expertise: 3,
+        name: 'Docker Desktop'
+      }),
+      Skill.fromObject({
+        expertise: 2,
+        name: 'Docker Hub'
+      }),
+      Skill.fromObject({
+        expertise: 2,
         name: 'Docker'
       })
     ]
@@ -89,10 +97,6 @@ export function useFetchSkills() {
       Skill.fromObject({
         expertise: 2,
         name: 'Python'
-      }),
-      Skill.fromObject({
-        expertise: 2,
-        name: 'Docker Hub'
       })
     ]
     softwareSkills.value = [
@@ -103,10 +107,6 @@ export function useFetchSkills() {
       Skill.fromObject({
         expertise: 6,
         name: 'Eclipse'
-      }),
-      Skill.fromObject({
-        expertise: 3,
-        name: 'Docker Desktop'
       }),
       Skill.fromObject({
         expertise: 6,
