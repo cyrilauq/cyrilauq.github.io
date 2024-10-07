@@ -16,5 +16,6 @@ const { projects } = useFetchProjects()
 <style lang="css" scoped>
 .projects-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

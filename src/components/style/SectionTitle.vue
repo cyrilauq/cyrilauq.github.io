@@ -151,4 +151,10 @@ defineProps<{ title: string }>()
   font-style: normal;
   font-weight: 400;
 }
+
+@media screen and (max-width: 540px) {
+  svg {
+    width: 100%;
+  }
+}
 </style>

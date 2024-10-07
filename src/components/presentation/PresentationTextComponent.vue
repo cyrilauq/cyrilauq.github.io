@@ -46,4 +46,17 @@ import NotchedBorder from '../style/NotchedBorder.vue'
   color: #ffff01;
   font-size: 30pt;
 }
+
+@media screen and (max-width: 540px) {
+  .presentation-container :deep(.container) {
+    width: 100%;
+    height: auto;
+    padding: 25px;
+  }
+
+  .presentation-container {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

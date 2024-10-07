@@ -65,4 +65,12 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+@media screen and (max-width: 540px) {
+  ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 </style>

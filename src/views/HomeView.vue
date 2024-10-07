@@ -105,4 +105,17 @@ section p:has(a) {
   width: 100%;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 540px) {
+  .presentation-section {
+    width: 100%;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+  }
+
+  .projects-section div {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+}
 </style>

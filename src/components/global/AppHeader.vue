@@ -16,4 +16,11 @@ header {
   box-shadow: 0 0 10px 10px rgba(126, 40, 45, 0.885);
   align-items: flex-end;
 }
+
+@media screen and (max-width: 540px) {
+  header {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

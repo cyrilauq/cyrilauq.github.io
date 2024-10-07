@@ -60,4 +60,14 @@ nav a:hover,
   caret-color: rgba(52, 211, 214, 1);
   border-bottom: 1px solid rgba(52, 211, 214, 1);
 }
+
+@media screen and (max-width: 540px) {
+  nav {
+    width: 100%;
+    height: auto;
+    flex-direction: unset;
+    flex-wrap: wrap;
+    justify-content: unset;
+  }
+}
 </style>
