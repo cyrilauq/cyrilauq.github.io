@@ -68,12 +68,23 @@ export default class Project {
       id: object.id || 'No id provided',
       name: object.name || 'No project name provided',
       description: object.description || 'No description provided',
-      links: object.links?.map((l) => ProjectLink.fromObject(l)) || [],
+      links: this.getLinksFromObject(object),
       technologies: object.technologies || [],
       miniatureLink: object.miniatureLink || '',
       screenshotLinks: object.screenshotLinks || [],
       liveLink: object.liveLink || ''
     })
     return project
+  }
+
+  public static getLinksFromObject(object: any) {
+    try {
+      return object.links?.map((l: any) => ProjectLink.fromObject(l)) || []
+    } catch(error) {
+      if((error as Error).name === 'TypeError') {
+        return Object.keys(object.links).map(k => ProjectLink.fromObject({ link: object.links[k], name: k }))
+      }
+      throw error
+    }
   }
 }
