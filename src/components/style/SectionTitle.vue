@@ -15,7 +15,7 @@
         viewBox="475 343 441 40"
         style="-webkit-print-color-adjust::exact"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        fill="none"
+        :fill="bgColor"
         version="1.1"
       >
         <g id="shape-309530fd-6c47-8011-8005-094c51b9c3d4" data-testid="Rectangle">
@@ -55,7 +55,9 @@
   </div>
 </template>
 <script setup lang="ts">
-defineProps<{ title: string }>()
+withDefaults(defineProps<{ title: string; bgColor?: string }>(), {
+  bgColor: 'transparent'
+})
 </script>
 <style lang="css" scoped>
 @font-face {
