@@ -3,7 +3,15 @@
     <div v-if="project" class="miniature">
       <h3 class="project-name">{{ project.name }}</h3>
       <div>
-        <img :src="'/image.png'" :alt="project.name" class="miniature-img" />
+        <img
+          :src="
+            !project.miniatureLink || project.miniatureLink.length === 0
+              ? '/image.png'
+              : project.miniatureLink
+          "
+          :alt="project.name"
+          class="miniature-img"
+        />
         <div>
           <p>{{ project.description }}</p>
           <NotchedBorder border-color="#b2dac4">
