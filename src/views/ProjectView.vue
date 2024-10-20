@@ -1,33 +1,50 @@
 <template>
   <main>
-    <h1>{{ project?.name }}</h1>
-    <div>
-      <h2>Description</h2>
-      <p>{{ project?.description }}</p>
-    </div>
-    <TechnologiesSection :technologies="project?.technologies" />
-    <GitHubLinks :links="project?.links" />
-    <ScreenShotSection :screenshot-links="project?.screenshotLinks" />
+    <SectionTitle :title="currentProject?.name || ''" bg-color="#bbbb0054" />
+    <NotchedBorder class="container">
+      <div>
+        <h2>Description</h2>
+        <p>{{ currentProject?.description }}</p>
+      </div>
+      <TechnologiesSection :technologies="currentProject?.technologies" />
+      <GitHubLinks :links="currentProject?.links" />
+      <ScreenShotSection :screenshot-links="currentProject?.screenshotLinks" />
+    </NotchedBorder>
   </main>
 </template>
 <script lang="ts" setup>
 import GitHubLinks from '@/components/project/GitHubLinks.vue'
 import ScreenShotSection from '@/components/project/ScreenShotSection.vue'
 import TechnologiesSection from '@/components/project/TechnologiesSection.vue'
+import NotchedBorder from '@/components/style/NotchedBorder.vue'
+import SectionTitle from '@/components/style/SectionTitle.vue'
 
 import { useFetchProjects } from '@/modules/composables/useFetchProjects'
-import Project from '@/modules/models/project'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const project = ref<Project>()
-
-const { fetchById } = useFetchProjects()
+const { fetchById, currentProject } = useFetchProjects()
 
 onMounted(() => {
-  fetchById([...route.params.id][0]).then((p) => (project.value = p))
+  fetchById(route.params.id as string).catch((error) => console.error(error))
 })
 </script>
-<style lang=""></style>
+<style lang="css" scoped>
+main {
+  margin-block-start: 25px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  margin-block-start: 0.7rem;
+}
+
+.container :deep(.container) {
+  padding: 50px;
+}
+</style>
