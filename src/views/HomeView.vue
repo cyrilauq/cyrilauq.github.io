@@ -1,35 +1,27 @@
 <script setup lang="ts">
 import PhotoPresentationComponent from '@/components/presentation/PhotoPresentationComponent.vue'
 import PresentationTextComponent from '@/components/presentation/PresentationTextComponent.vue'
-import AppProjectMiniature from '@/components/project/AppProjectMiniature.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
 import ProjectListMiniature from '@/components/project/ProjectListMiniature.vue'
 import SkillSection from '@/components/skill/SkillSection.vue'
 import SectionTitle from '@/components/style/SectionTitle.vue'
 import { useFetchProjects } from '@/modules/composables/useFetchProjects'
 import { useFetchSkills } from '@/modules/composables/useFetchSkills'
-import Project from '@/modules/models/project'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
 
-const { lastProjects } = useFetchProjects()
+const { projects, fetchLast4Project, currentProject, fetchById } = useFetchProjects()
 const { lastSkills } = useFetchSkills()
 
-const projectsToDisplay = computed(() =>
-  lastProjects.value?.map((p) => {
-    return { id: p.id, name: p.name }
-  })
-)
-
-const selectedProject = ref<Project | undefined>()
-
 onMounted(() => {
-  if (lastProjects.value !== undefined) {
-    selectedProject.value = lastProjects.value[0]
-  }
+  fetchLast4Project().then(() => {
+    if (projects.value !== undefined) {
+      fetchById(projects.value[0].id).catch((error) => console.error(error))
+    }
+  })
 })
 
 const onSelectedProjectChanged = (projectId: string) => {
-  selectedProject.value = lastProjects.value?.find((p) => p.id === projectId)
+  fetchById(projectId).catch((error) => console.error(error))
 }
 </script>
 
@@ -42,8 +34,8 @@ const onSelectedProjectChanged = (projectId: string) => {
     <section class="projects-section secundary-section">
       <SectionTitle title="My projects" class="section-title" />
       <div>
-        <ProjectList :projects="projectsToDisplay" @project-selected="onSelectedProjectChanged" />
-        <ProjectListMiniature :project="selectedProject" />
+        <ProjectList :projects="projects" @project-selected="onSelectedProjectChanged" />
+        <ProjectListMiniature :project="currentProject" />
       </div>
     </section>
     <section class="secundary-section">
