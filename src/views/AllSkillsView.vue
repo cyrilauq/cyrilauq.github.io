@@ -3,8 +3,7 @@ import SkillSection from '@/components/skill/SkillSection.vue'
 import NotchedBorder from '@/components/style/NotchedBorder.vue'
 import { useFetchSkills } from '@/modules/composables/useFetchSkills'
 
-const { programmingLangageSkills, frameworkSkills, otherSkills, scriptingSkills, softwareSkills } =
-  useFetchSkills()
+const { skills } = useFetchSkills()
 </script>
 
 <template>
@@ -17,18 +16,12 @@ const { programmingLangageSkills, frameworkSkills, otherSkills, scriptingSkills,
         something to learn.
       </p>
       <SkillSection
+        v-for="skill in skills"
+        :key="skill.skillsCatUid"
         class="skills-section"
-        :skills="programmingLangageSkills"
-        skills-type="Programming langage"
+        :skills="skill.skills"
+        :skills-type="skill.skillsFriendlyCat"
       />
-      <SkillSection class="skills-section" :skills="frameworkSkills" skills-type="Framework" />
-      <SkillSection class="skills-section" :skills="otherSkills" skills-type="Other/Tools" />
-      <SkillSection
-        class="skills-section"
-        :skills="scriptingSkills"
-        skills-type="Scripting skills"
-      />
-      <SkillSection class="skills-section" :skills="softwareSkills" skills-type="Software skills" />
     </NotchedBorder>
   </main>
 </template>

@@ -1,5 +1,6 @@
-import { computed, onMounted, ref } from 'vue'
-import Skill from '../models/skill'
+import { computed, onMounted, reactive, ref } from 'vue'
+import { skillFromObject, type Skill } from '../models/skill'
+import type SkillWrapper from '../models/skillsWrapper'
 
 export function useFetchSkills() {
   const programmingLangageSkills = ref<Array<Skill>>()
@@ -7,6 +8,7 @@ export function useFetchSkills() {
   const otherSkills = ref<Array<Skill>>()
   const scriptingSkills = ref<Array<Skill>>()
   const softwareSkills = ref<Array<Skill>>()
+  const skills = reactive<Array<SkillWrapper>>(new Array<SkillWrapper>(0))
 
   const lastSkills = computed(() => {
     const temp = programmingLangageSkills.value
@@ -20,107 +22,122 @@ export function useFetchSkills() {
 
   onMounted(() => {
     programmingLangageSkills.value = [
-      Skill.fromObject({
+      skillFromObject({
         expertise: 7,
         name: 'C#'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 5,
         name: 'Kotlin'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 5,
         name: 'PHP'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: 'Java'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 7,
         name: 'Javascript'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: 'TypeScript'
       })
     ] as Array<Skill>
     frameworkSkills.value = [
-      Skill.fromObject({
+      skillFromObject({
         expertise: 7,
         name: 'Vue JS 3'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 3,
         name: 'Next.JS'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 3,
         name: 'Angular'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 8,
         name: '.NET'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: '.NET MAUI'
       })
     ]
     otherSkills.value = [
-      Skill.fromObject({
+      skillFromObject({
         expertise: 9,
         name: 'HTML'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 7,
         name: 'CSS'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 3,
         name: 'Docker Desktop'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 2,
         name: 'Docker Hub'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 2,
         name: 'Docker'
       })
     ]
     scriptingSkills.value = [
-      Skill.fromObject({
+      skillFromObject({
         expertise: 3,
         name: 'Powershell'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 2,
         name: 'Python'
       })
     ]
     softwareSkills.value = [
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: 'JetBrains Rider'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: 'Eclipse'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 6,
         name: 'JetBrains IntelliJ'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 8,
         name: 'Visual Studio'
       }),
-      Skill.fromObject({
+      skillFromObject({
         expertise: 8,
         name: 'Visual Studio Code'
       })
     ]
+    skills.push({
+      skillsCatUid: 'programming_lanaguges',
+      skillsFriendlyCat: 'Programming Langages',
+      skills: programmingLangageSkills.value
+    })
+    skills.push({
+      skillsCatUid: 'software',
+      skillsFriendlyCat: 'Softwares',
+      skills: softwareSkills.value
+    })
+    skills.push({
+      skillsCatUid: 'frameworks',
+      skillsFriendlyCat: 'Frameworks',
+      skills: frameworkSkills.value
+    })
   })
 
   return {
@@ -129,6 +146,7 @@ export function useFetchSkills() {
     frameworkSkills,
     otherSkills,
     scriptingSkills,
-    softwareSkills
+    softwareSkills,
+    skills
   }
 }

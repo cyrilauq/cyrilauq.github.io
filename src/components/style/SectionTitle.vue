@@ -60,18 +60,10 @@ withDefaults(defineProps<{ title: string; bgColor?: string }>(), {
 })
 </script>
 <style lang="css" scoped>
-@font-face {
-  font-family: 'Cyberpunk';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url(https://design.penpot.app/assets/by-id/1c687604-2057-4e44-b5f1-7c56f45e1de7)
-    format('woff');
-}
-
 .title-text {
   font-size: 30pt;
   color: #ffff01;
+  font-family: 'Cyberpunk';
   position: absolute;
 }
 

@@ -21,14 +21,17 @@ export function useFetchProjects() {
 
   async function fetchLast4Project() {
     const firebaseDocs = await projectsCollection.get()
-    firebaseDocs.forEach((doc) => {
-      projects.value?.push(Project.fromObject({ ...doc.data(), id: doc.id }))
-    })
+    projects.value = firebaseDocs.docs
+      .slice(0, firebaseDocs.docs.length < 4 ? firebaseDocs.docs.length : 4)
+      .map((doc) => Project.fromObject({ ...doc.data(), id: doc.id }))
   }
 
-  onMounted(() => {
-    projects.value = []
-  })
+  async function fetchAllProjects(): Promise<void> {
+    const firebaseDocs = await projectsCollection.get()
+    projects.value = firebaseDocs.docs.map((doc) =>
+      Project.fromObject({ ...doc.data(), id: doc.id })
+    )
+  }
 
-  return { projects, fetchById, lastProjects, fetchLast4Project, currentProject }
+  return { projects, fetchById, lastProjects, fetchLast4Project, currentProject, fetchAllProjects }
 }
