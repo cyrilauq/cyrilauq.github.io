@@ -20,6 +20,13 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+env:
+  VITE_API_KEY: ${{ vars.VITE_API_KEY }}
+  VITE_AUTH_DOMAIN: ${{ vars.VITE_AUTH_DOMAIN }}
+  VITE_PROJECT_ID: ${{ vars.VITE_PROJECT_ID }}
+  VITE_STORAGE_BUCKET: ${{ vars.VITE_STORAGE_BUCKET }}
+  VITE_APP_ID: ${{ vars.VITE_APP_ID }}
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
