@@ -1,1 +1,0 @@
-import{_ as t,c as o,a as e,o as a}from"./index-Ci39QRGU.js";const r={};function s(c,n){return a(),o("main",null,n[0]||(n[0]=[e("h1",null,"Contact",-1),e("section",null,[e("p",null,"Page building in progress....")],-1)]))}const i=t(r,[["render",s]]);export{i as default};
