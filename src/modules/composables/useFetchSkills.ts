@@ -12,18 +12,12 @@ export function useFetchSkills() {
   const skills = reactive<Array<SkillWrapper>>(new Array<SkillWrapper>(0))
 
   const lastSkills = computed(() => {
-    const temp = programmingLangageSkills.value
-      ?.concat(frameworkSkills?.value || [])
-      .concat(otherSkills.value || [])
-      .concat(scriptingSkills.value || [])
-      .concat(softwareSkills.value || [])
+    const temp = skills.reduce((prev, curr) => prev.concat(curr.skills), new Array<Skill>(0))
     temp?.sort(() => Math.random() - 0.5)
     return temp?.slice(-6)
   })
 
   onMounted(async () => {
-    const firebaseDocs = await skillsCollection.get()
-    console.log(firebaseDocs.size)
     await loadSkills()
   })
 
