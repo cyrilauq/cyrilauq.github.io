@@ -1,15 +1,11 @@
 <template>
   <NotchedBorder class="project-list-container">
     <ul>
-      <li
-        v-for="(projectItem, index) in projects"
-        :key="index"
-        @click.prevent="onProjectNameClicked(projectItem.id)"
-      >
+      <li v-for="(projectItem, index) in projects" :key="index" @click.prevent="onProjectNameClicked(projectItem.id)">
         {{ projectItem.name }}
       </li>
     </ul>
-    <NotchedBorder border-color="#b2dac4">
+    <NotchedBorder border-color="#b2dac4" class="link-btn">
       <RouterLink :to="{ name: 'all-projects' }">See all</RouterLink>
     </NotchedBorder>
   </NotchedBorder>
@@ -39,7 +35,7 @@ const onProjectNameClicked = (projectId: string) => {
 <style lang="css" scoped>
 .project-list-container {
   width: 150px;
-  height: 206px;
+  height: 240px;
 }
 
 .project-list-container a {
@@ -56,7 +52,7 @@ const onProjectNameClicked = (projectId: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 ul {

@@ -27,8 +27,7 @@ defineProps<{ skills?: Skill[]; skillsType?: string }>()
 }
 
 .skills-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 </style>

@@ -2,15 +2,10 @@
   <RouterLink :to="{ name: 'project', params: { id: project.id } }">
     <div>
       <h2>{{ project.name }}</h2>
-      <img
-        :src="
-          !project.miniatureLink || project.miniatureLink.length === 0
-            ? '/image.png'
-            : project.miniatureLink
-        "
-        :alt="project.name"
-        class="project-miniature-picture"
-      />
+      <img :src="!project.miniatureLink || project.miniatureLink.length === 0
+          ? '/image.png'
+          : project.miniatureLink
+        " :alt="project.name" class="project-miniature-picture" />
     </div>
   </RouterLink>
 </template>

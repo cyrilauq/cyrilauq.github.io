@@ -9,7 +9,7 @@
           " :alt="project.name" class="miniature-img" />
         <div>
           <p>{{ project.description }}</p>
-          <NotchedBorder border-color="#b2dac4">
+          <NotchedBorder border-color="#b2dac4" class="link-btn">
             <RouterLink :to="{ name: 'project', params: { id: project.id } }">See project</RouterLink>
           </NotchedBorder>
         </div>
@@ -29,7 +29,7 @@ defineProps<{ project?: Project }>()
 <style lang="css" scoped>
 .project-list-miniature-container {
   width: 660px;
-  height: 206px;
+  height: 240px;
 }
 
 .miniature {
