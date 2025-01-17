@@ -9,10 +9,10 @@ export function useFetchSkills() {
   const otherSkills = ref<Array<Skill>>()
   const scriptingSkills = ref<Array<Skill>>()
   const softwareSkills = ref<Array<Skill>>()
-  const skills = reactive<Array<SkillWrapper>>(new Array<SkillWrapper>(0))
+  const skills = ref<Array<SkillWrapper>>(new Array<SkillWrapper>(0))
 
   const lastSkills = computed(() => {
-    const temp = skills.reduce((prev, curr) => prev.concat(curr.skills), new Array<Skill>(0))
+    const temp = skills.value.reduce((prev, curr) => prev.concat(curr.skills), new Array<Skill>(0))
     temp?.sort(() => Math.random() - 0.5)
     return temp?.slice(-6)
   })
@@ -39,25 +39,27 @@ export function useFetchSkills() {
   }
 
   async function loadSkills() {
-    skills.push({
+    const loadedSkills = new Array<SkillWrapper>(0)
+    loadedSkills.push({
       skills: await getSkillsByType('programming_languge'),
       skillsCatUid: 'programming_languge',
       skillsFriendlyCat: 'Programming Langages'
     })
-    skills.push({
+    loadedSkills.push({
       skills: await getSkillsByType('it_tools'),
       skillsCatUid: 'it_tools',
       skillsFriendlyCat: 'Softwares'
     })
-    skills.push({
+    loadedSkills.push({
       skills: await getSkillsByType('frameworks'),
       skillsCatUid: 'frameworks',
       skillsFriendlyCat: 'Frameworks'
     })
-    skills.push({
+    loadedSkills.push({
       skills: await getSkillsByType('other'),
       skillsCatUid: 'other',
       skillsFriendlyCat: 'Others'
     })
+    skills.value = loadedSkills
   }
 }
