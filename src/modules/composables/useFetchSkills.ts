@@ -1,6 +1,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { skillFromObject, type Skill } from '../models/skill'
 import type SkillWrapper from '../models/skillsWrapper'
+import { skillsCollection } from '../includes/firebase'
 
 export function useFetchSkills() {
   const programmingLangageSkills = ref<Array<Skill>>()
@@ -20,125 +21,18 @@ export function useFetchSkills() {
     return temp?.slice(-6)
   })
 
-  onMounted(() => {
-    programmingLangageSkills.value = [
-      skillFromObject({
-        expertise: 7,
-        name: 'C#'
-      }),
-      skillFromObject({
-        expertise: 5,
-        name: 'Kotlin'
-      }),
-      skillFromObject({
-        expertise: 5,
-        name: 'PHP'
-      }),
-      skillFromObject({
-        expertise: 6,
-        name: 'Java'
-      }),
-      skillFromObject({
-        expertise: 7,
-        name: 'Javascript'
-      }),
-      skillFromObject({
-        expertise: 6,
-        name: 'TypeScript'
-      })
-    ] as Array<Skill>
-    frameworkSkills.value = [
-      skillFromObject({
-        expertise: 7,
-        name: 'Vue JS 3'
-      }),
-      skillFromObject({
-        expertise: 3,
-        name: 'Next.JS'
-      }),
-      skillFromObject({
-        expertise: 3,
-        name: 'Angular'
-      }),
-      skillFromObject({
-        expertise: 8,
-        name: '.NET'
-      }),
-      skillFromObject({
-        expertise: 6,
-        name: '.NET MAUI'
-      })
-    ]
-    otherSkills.value = [
-      skillFromObject({
-        expertise: 9,
-        name: 'HTML'
-      }),
-      skillFromObject({
-        expertise: 7,
-        name: 'CSS'
-      }),
-      skillFromObject({
-        expertise: 3,
-        name: 'Docker Desktop'
-      }),
-      skillFromObject({
-        expertise: 2,
-        name: 'Docker Hub'
-      }),
-      skillFromObject({
-        expertise: 2,
-        name: 'Docker'
-      })
-    ]
-    scriptingSkills.value = [
-      skillFromObject({
-        expertise: 3,
-        name: 'Powershell'
-      }),
-      skillFromObject({
-        expertise: 2,
-        name: 'Python'
-      })
-    ]
-    softwareSkills.value = [
-      skillFromObject({
-        expertise: 6,
-        name: 'JetBrains Rider'
-      }),
-      skillFromObject({
-        expertise: 6,
-        name: 'Eclipse'
-      }),
-      skillFromObject({
-        expertise: 6,
-        name: 'JetBrains IntelliJ'
-      }),
-      skillFromObject({
-        expertise: 8,
-        name: 'Visual Studio'
-      }),
-      skillFromObject({
-        expertise: 8,
-        name: 'Visual Studio Code'
-      })
-    ]
-    skills.push({
-      skillsCatUid: 'programming_lanaguges',
-      skillsFriendlyCat: 'Programming Langages',
-      skills: programmingLangageSkills.value
-    })
-    skills.push({
-      skillsCatUid: 'software',
-      skillsFriendlyCat: 'Softwares',
-      skills: softwareSkills.value
-    })
-    skills.push({
-      skillsCatUid: 'frameworks',
-      skillsFriendlyCat: 'Frameworks',
-      skills: frameworkSkills.value
-    })
+  onMounted(async () => {
+    const firebaseDocs = await skillsCollection.get()
+    console.log(firebaseDocs.size)
+    await loadSkills()
   })
+
+  const getSkillsByType = async (type: string) => {
+    return (await skillsCollection.where('type', '==', type).get()).docs.map((doc) => {
+      const docData = doc.data()
+      return skillFromObject({ name: docData.name, expertise: Number(docData.expertise) })
+    })
+  }
 
   return {
     programmingLangageSkills,
@@ -148,5 +42,28 @@ export function useFetchSkills() {
     scriptingSkills,
     softwareSkills,
     skills
+  }
+
+  async function loadSkills() {
+    skills.push({
+      skills: await getSkillsByType('programming_languge'),
+      skillsCatUid: 'programming_languge',
+      skillsFriendlyCat: 'Programming Langages'
+    })
+    skills.push({
+      skills: await getSkillsByType('it_tools'),
+      skillsCatUid: 'it_tools',
+      skillsFriendlyCat: 'Softwares'
+    })
+    skills.push({
+      skills: await getSkillsByType('frameworks'),
+      skillsCatUid: 'frameworks',
+      skillsFriendlyCat: 'Frameworks'
+    })
+    skills.push({
+      skills: await getSkillsByType('other'),
+      skillsCatUid: 'other',
+      skillsFriendlyCat: 'Others'
+    })
   }
 }

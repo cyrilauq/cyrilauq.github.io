@@ -13,7 +13,8 @@
           <li>Angular</li>
         </ul>
         <p>
-          One thing I do to upgrade my skill or learn new ones, is that I buy a course on Udemy.
+          One thing I do to upgrade my skill or learn new ones, is that I buy a course on Udemy or I go on free tutos on
+          Microsoft Learn or Open Classroom
         </p>
       </section>
     </NotchedBorder>
@@ -23,8 +24,13 @@
         <p>Here some of the certifications I earned:</p>
         <ul>
           <li>
-            <a href="https://www.udemy.com/certificate/UC-84c12eed-53bf-4bec-b9bc-8573982d4d7f/"
-              >Complete Vue Developer Bootcamp (Pinia, Vitest)
+            <a href="https://www.udemy.com/certificate/UC-84c12eed-53bf-4bec-b9bc-8573982d4d7f/">Complete Vue Developer
+              Bootcamp (Pinia, Vitest)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.udemy.com/certificate/UC-bd4fee84-5257-4956-89ff-25744799dd93/">Build an app with
+              ASPNET Core and Angular from scratch
             </a>
           </li>
         </ul>

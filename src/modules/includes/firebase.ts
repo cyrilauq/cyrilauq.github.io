@@ -12,5 +12,6 @@ firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore()
 const projectsCollection = db.collection('projects')
+const skillsCollection = db.collection('skills')
 
-export { db, projectsCollection }
+export { db, projectsCollection, skillsCollection }
