@@ -23,11 +23,13 @@ withDefaults(defineProps<NotchedBorderProps>(), {
   background-color: v-bind(borderColor);
 }
 
-.notched-border-wrapper > .container {
+.notched-border-wrapper>.container {
   background-color: v-bind(bgColor);
   height: 100%;
   clip-path: polygon(0 20%, 10% 0, 100% 0, 100% 80%, 90% 100%, 0% 100%);
   width: 100%;
+  padding-inline: .8rem;
+  padding-block: 1rem;
   height: 100%;
 }
 </style>

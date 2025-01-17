@@ -11,4 +11,23 @@ import AppFooter from './components/global/AppFooter.vue'
   <AppFooter v-once />
 </template>
 
-<style scoped></style>
+<style>
+main {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 540px) {
+  .title-form {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+  }
+}
+</style>

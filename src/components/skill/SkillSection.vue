@@ -1,17 +1,12 @@
 <template>
   <NotchedBorder>
-    <section>
+    <article>
       <h2 v-if="skillsType" class="skill-section-title">{{ skillsType }}</h2>
       <p v-if="skills === undefined || skills.length === 0">No skills provided</p>
       <div v-else class="skills-wrapper">
-        <SkillExpertiseMiniature
-          v-for="(skill, index) in skills"
-          :key="index"
-          :skill="skill"
-          class="skill-item"
-        />
+        <SkillExpertiseMiniature v-for="(skill, index) in skills" :key="index" :skill="skill" class="skill-item" />
       </div>
-    </section>
+    </article>
   </NotchedBorder>
 </template>
 <script setup lang="ts">
@@ -24,7 +19,6 @@ defineProps<{ skills?: Skill[]; skillsType?: string }>()
 <style lang="css" scoped>
 :deep(.skill-item) {
   margin-inline: 1.8em;
-  width: 13rem;
 }
 
 .skill-section-title {

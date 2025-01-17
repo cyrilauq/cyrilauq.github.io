@@ -41,7 +41,9 @@ const onSelectedProjectChanged = (projectId: string) => {
     <section class="secundary-section">
       <SectionTitle title="My skills" class="section-title" />
       <SkillSection :skills="lastSkills" />
-      <p><RouterLink :to="{ name: 'all-skills' }">Want to see all my skills?</RouterLink></p>
+      <p>
+        <RouterLink :to="{ name: 'all-skills' }">Want to see all my skills?</RouterLink>
+      </p>
     </section>
   </main>
 </template>
@@ -50,21 +52,12 @@ main section:first-child {
   margin-block-start: 2rem;
 }
 
-main {
-  width: 1000px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .section-title {
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
-section > div {
+section>div {
   display: flex;
   justify-content: space-between;
 }
@@ -93,7 +86,7 @@ section p:has(a) {
   flex-direction: column;
 }
 
-.secundary-section > div {
+.secundary-section>div {
   width: 100%;
   justify-content: space-around;
 }

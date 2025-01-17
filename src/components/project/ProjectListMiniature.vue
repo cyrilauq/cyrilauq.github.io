@@ -3,21 +3,14 @@
     <div v-if="project" class="miniature">
       <h3 class="project-name">{{ project.name }}</h3>
       <div>
-        <img
-          :src="
-            !project.miniatureLink || project.miniatureLink.length === 0
-              ? '/image.png'
-              : project.miniatureLink
-          "
-          :alt="project.name"
-          class="miniature-img"
-        />
+        <img :src="!project.miniatureLink || project.miniatureLink.length === 0
+          ? '/image.png'
+          : project.miniatureLink
+          " :alt="project.name" class="miniature-img" />
         <div>
           <p>{{ project.description }}</p>
           <NotchedBorder border-color="#b2dac4">
-            <RouterLink :to="{ name: 'project', params: { id: project.id } }"
-              >See project</RouterLink
-            >
+            <RouterLink :to="{ name: 'project', params: { id: project.id } }">See project</RouterLink>
           </NotchedBorder>
         </div>
       </div>
@@ -76,5 +69,16 @@ defineProps<{ project?: Project }>()
   height: 25px;
   align-items: center;
   place-items: center;
+}
+
+
+@media screen and (max-width: 540px) {
+  .miniature>div {
+    flex-direction: column;
+  }
+
+  .project-list-miniature-container {
+    height: auto;
+  }
 }
 </style>
