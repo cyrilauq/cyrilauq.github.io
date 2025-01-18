@@ -10,6 +10,7 @@ export function useFetchSkills() {
   const scriptingSkills = ref<Array<Skill>>()
   const softwareSkills = ref<Array<Skill>>()
   const skills = ref<Array<SkillWrapper>>(new Array<SkillWrapper>(0))
+  const isLoading = ref(true)
 
   const lastSkills = computed(() => {
     const temp = skills.value.reduce((prev, curr) => prev.concat(curr.skills), new Array<Skill>(0))
@@ -28,17 +29,8 @@ export function useFetchSkills() {
     })
   }
 
-  return {
-    programmingLangageSkills,
-    lastSkills,
-    frameworkSkills,
-    otherSkills,
-    scriptingSkills,
-    softwareSkills,
-    skills
-  }
-
   async function loadSkills() {
+    isLoading.value = true
     const loadedSkills = new Array<SkillWrapper>(0)
     loadedSkills.push({
       skills: await getSkillsByType('programming_languge'),
@@ -61,5 +53,17 @@ export function useFetchSkills() {
       skillsFriendlyCat: 'Others'
     })
     skills.value = loadedSkills
+    isLoading.value = false
+  }
+
+  return {
+    programmingLangageSkills,
+    lastSkills,
+    frameworkSkills,
+    otherSkills,
+    scriptingSkills,
+    softwareSkills,
+    skills,
+    isLoading
   }
 }

@@ -26,20 +26,21 @@ import NotchedBorder from '../style/NotchedBorder.vue'
 
 defineProps<{ project?: Project }>()
 </script>
-<style lang="css" scoped>
+<style lang="css">
 .project-list-miniature-container {
   width: 660px;
   height: 240px;
 }
 
 .miniature {
-  padding: 10px;
+  padding-inline: 10px;
   width: 100%;
   height: 100%;
 }
 
 .miniature .project-name {
   margin-left: 60px;
+  margin-bottom: 1rem;
   color: #ffff01;
 }
 

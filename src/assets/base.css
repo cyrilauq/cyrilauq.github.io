@@ -38,6 +38,9 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  --loading-animation: pulse-bg 1s infinite;
+  --loading-bg-color: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,6 +54,21 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+  }
+}
+
+
+@keyframes pulse-bg {
+  0% {
+    background-color: #ddd;
+  }
+
+  50% {
+    background-color: #d0d0d0;
+  }
+
+  100% {
+    background-color: #ddd;
   }
 }
 

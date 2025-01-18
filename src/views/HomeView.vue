@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import LoaderSkeletonList from '@/components/loader/skeletons/LoaderSkeletonList.vue'
+import LoaderSkeletonMiniature from '@/components/loader/skeletons/LoaderSkeletonMiniature.vue'
 import PhotoPresentationComponent from '@/components/presentation/PhotoPresentationComponent.vue'
 import PresentationTextComponent from '@/components/presentation/PresentationTextComponent.vue'
 import ProjectList from '@/components/project/ProjectList.vue'
@@ -10,7 +12,7 @@ import { useFetchSkills } from '@/modules/composables/useFetchSkills'
 import { onMounted } from 'vue'
 
 const { projects, fetchLast4Project, currentProject, fetchById } = useFetchProjects()
-const { lastSkills } = useFetchSkills()
+const { lastSkills, isLoading } = useFetchSkills()
 
 onMounted(() => {
   fetchLast4Project().then(() => {
@@ -33,7 +35,11 @@ const onSelectedProjectChanged = (projectId: string) => {
     </section>
     <section class="projects-section secundary-section">
       <SectionTitle title="My projects" class="section-title" />
-      <div>
+      <div v-if="isLoading">
+        <LoaderSkeletonList />
+        <LoaderSkeletonMiniature />
+      </div>
+      <div v-else>
         <ProjectList :projects="projects" @project-selected="onSelectedProjectChanged" />
         <ProjectListMiniature :project="currentProject" />
       </div>
